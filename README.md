@@ -1,2 +1,2 @@
 # Blog do código
-Node.js e JWT: autenticação com tokens
+> Uma API de blog em Node.js
