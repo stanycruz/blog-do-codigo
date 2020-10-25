@@ -1,10 +1,10 @@
-const { promisfy } = require('util');
+const { promisify } = require('util');
 
 module.exports = lista => {
-    const setAsync = promisfy(lista.set).bind(lista);
-    const existsAsync = promisfy(lista.exists).bind(lista);
-    const getAsync = promisfy(lista.get).bind(lista);
-    const delAsync = promisfy(lista.del).bind(lista);
+    const setAsync = promisify(lista.set).bind(lista);
+    const existsAsync = promisify(lista.exists).bind(lista);
+    const getAsync = promisify(lista.get).bind(lista);
+    const delAsync = promisify(lista.del).bind(lista);
 
     return {
         async adiciona(chave, valor, dataExpiracao) {
