@@ -19,15 +19,15 @@ const USUARIOS_SCHEMA = `
   `;
 
 db.serialize(() => {
-  db.run('PRAGMA foreign_keys=ON');
-  db.run(POSTS_SCHEMA);
-  db.run(USUARIOS_SCHEMA);
+    db.run('PRAGMA foreign_keys=ON');
+    db.run(POSTS_SCHEMA);
+    db.run(USUARIOS_SCHEMA);
 });
 
 process.on('SIGINT', () =>
-  db.close(() => {
-    process.exit(0);
-  })
+    db.close(() => {
+        process.exit(0);
+    })
 );
 
 module.exports = db;

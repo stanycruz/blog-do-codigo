@@ -11,47 +11,47 @@ const bcrypt = require('bcrypt');
 const tokens = require('./tokens');
 
 function verificaUsuario(usuario) {
-  if (!usuario) {
-    throw new InvalidArgumentError('Não existe usuário com esse e-mail!');
-  }
+    if (!usuario) {
+        throw new InvalidArgumentError('Não existe usuário com esse e-mail!');
+    }
 }
 
 async function verificaSenha(senha, senhaHash) {
-  const senhaValida = await bcrypt.compare(senha, senhaHash);
-  if (!senhaValida) {
-    throw new InvalidArgumentError('E-mail ou senha inválidos!');
-  }
+    const senhaValida = await bcrypt.compare(senha, senhaHash);
+    if (!senhaValida) {
+        throw new InvalidArgumentError('E-mail ou senha inválidos!');
+    }
 }
 
 passport.use(
-  new LocalStrategy(
-    {
-      usernameField: 'email',
-      passwordField: 'senha',
-      session: false,
-    },
-    async (email, senha, done) => {
-      try {
-        const usuario = await Usuario.buscaPorEmail(email);
-        verificaUsuario(usuario);
-        await verificaSenha(senha, usuario.senhaHash);
+    new LocalStrategy(
+        {
+            usernameField: 'email',
+            passwordField: 'senha',
+            session: false,
+        },
+        async (email, senha, done) => {
+            try {
+                const usuario = await Usuario.buscaPorEmail(email);
+                verificaUsuario(usuario);
+                await verificaSenha(senha, usuario.senhaHash);
 
-        done(null, usuario);
-      } catch (erro) {
-        done(erro);
-      }
-    }
-  )
+                done(null, usuario);
+            } catch (erro) {
+                done(erro);
+            }
+        }
+    )
 );
 
 passport.use(
-  new BearerStrategy(async (token, done) => {
-    try {
-      const id = await tokens.access.verifica(token);
-      const usuario = await Usuario.buscaPorId(id);
-      done(null, usuario, { token });
-    } catch (erro) {
-      done(erro);
-    }
-  })
+    new BearerStrategy(async (token, done) => {
+        try {
+            const id = await tokens.access.verifica(token);
+            const usuario = await Usuario.buscaPorId(id);
+            done(null, usuario, { token });
+        } catch (erro) {
+            done(erro);
+        }
+    })
 );

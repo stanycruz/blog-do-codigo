@@ -2,6 +2,7 @@
 
 [![Javascript](https://i.ibb.co/cgMc4Vc/javascript.png)](https://i.ibb.co/cgMc4Vc/javascript.png)
 
+
 ## Características principais
 
 * API REST feita em Javascript para Node.js
@@ -11,6 +12,7 @@
 * Documentação interativa com Swagger
 * Multiplataforma
   - Preparado para Windows, macOS e Linux.
+
 
 ## Como usar
 
@@ -31,6 +33,16 @@ $ npm start
 ```
 
 Observação: se você estiver usando Windows, existe uma versão do [Redis](https://github.com/microsoftarchive/redis/releases) que funciona como um Serviço do Windows.
+
+
+## Configurando uma senha segura para JWT
+
+Para usar uma senha segura para gerar acessar os tokens, crie uma variável de ambiente com o nome **CHAVE_JWT**, depois atribua ela o valor do resultado gerado pelos seguintes comandos a seguir obtidos pelo terminal:
+
+```bash
+$ node -e "console.log(require('crypto').randomBytes(256).toString('base64'))"
+```
+
 
 ## Créditos
 
